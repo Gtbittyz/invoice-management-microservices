@@ -1,0 +1,69 @@
+﻿<div class="page-container">
+    <a routerLink="/notas-fiscais" style="display:inline-block; margin-bottom:12px;">&larr; Voltar</a>
+
+    @if (carregando) {
+    <div style="display:flex; justify-content:center; padding:32px;">
+        <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    } @else if (nota) {
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Nota Fiscal nº {{ nota.numero }}</mat-card-title>
+            <mat-card-subtitle>
+                Criada em {{ nota.criadaEm | date: 'dd/MM/yyyy HH:mm' }}
+                @if (nota.impressaEm) {
+                &middot; Impressa em {{ nota.impressaEm | date: 'dd/MM/yyyy HH:mm' }}
+                }
+            </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <mat-chip [color]="nota.status === 'Aberta' ? 'accent' : 'primary'" selected style="margin-bottom:16px;">
+                {{ nota.status }}
+            </mat-chip>
+
+            <table mat-table [dataSource]="nota.itens" class="full-width">
+                <ng-container matColumnDef="produtoCodigo">
+                    <th mat-header-cell *matHeaderCellDef>Código</th>
+                    <td mat-cell *matCellDef="let i">{{ i.produtoCodigo }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="produtoDescricao">
+                    <th mat-header-cell *matHeaderCellDef>Produto</th>
+                    <td mat-cell *matCellDef="let i">{{ i.produtoDescricao }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="quantidade">
+                    <th mat-header-cell *matHeaderCellDef>Quantidade</th>
+                    <td mat-cell *matCellDef="let i">{{ i.quantidade }}</td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="colunasItens"></tr>
+                <tr mat-row *matRowDef="let row; columns: colunasItens;"></tr>
+            </table>
+
+            @if (erroImpressao) {
+            <div style="background:#fdecea; color:#611a15; padding:12px; border-radius:4px; margin-top:16px; display:flex; gap:8px; align-items:center;">
+                <mat-icon color="warn">error_outline</mat-icon>
+                <span>{{ erroImpressao }}</span>
+            </div>
+            }
+        </mat-card-content>
+
+        <mat-card-actions>
+            @if (nota.status === 'Aberta') {
+            <button mat-raised-button color="primary" (click)="imprimir()" [disabled]="imprimindo">
+                @if (imprimindo) {
+                <mat-spinner diameter="18" style="display:inline-block; margin-right:8px;"></mat-spinner>
+                Processando...
+                } @else {
+                <span><mat-icon>print</mat-icon> Imprimir nota fiscal</span>
+                }
+            </button>
+            } @else {
+            <span style="color:#666;">Esta nota já foi impressa e não pode ser alterada.</span>
+            }
+        </mat-card-actions>
+    </mat-card>
+    }
+</div>

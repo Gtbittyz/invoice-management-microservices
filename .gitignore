@@ -1,0 +1,22 @@
+# .NET
+bin/
+obj/
+*.user
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+
+# IDE
+.vs/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+
+# Logs, Env & Banco de Dados
+*.log
+.env
+postgres-data/

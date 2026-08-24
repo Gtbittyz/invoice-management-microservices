@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+    <mat-icon>receipt_long </mat-icon>
+    <span style="margin-left: 8px;">{{ title }}</span>
+    <span class="spacer"></span>
+    <a mat-button routerLink="/produtos" routerLinkActive="active-link">Produtos</a>
+    <a mat-button routerLink="/notas-fiscais" routerLinkActive="active-link">Notas Fiscais</a>
+</mat-toolbar>
+
+<router-outlet></router-outlet>

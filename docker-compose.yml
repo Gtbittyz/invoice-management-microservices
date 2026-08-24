@@ -1,0 +1,54 @@
+services:
+  estoque-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: estoque_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - estoque_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  faturamento-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: faturamento_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - faturamento_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+  estoque-service:
+    build: ./backend/EstoqueService
+    depends_on:
+      - estoque-db
+    environment:
+      ConnectionStrings__EstoqueDb: "Host=estoque-db;Port=5432;Database=estoque_db;Username=postgres;Password=postgres"
+    ports:
+      - "5080:8080"
+
+  faturamento-service:
+    build: ./backend/FaturamentoService
+    depends_on:
+      - faturamento-db
+      - estoque-service
+    environment:
+      ConnectionStrings__FaturamentoDb: "Host=faturamento-db;Port=5432;Database=faturamento_db;Username=postgres;Password=postgres"
+      EstoqueService__BaseUrl: "http://estoque-service:8080"
+    ports:
+      - "5081:8080"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      - estoque-service
+      - faturamento-service
+    ports:
+      - "4200:80"
+
+volumes:
+  estoque_data:
+  faturamento_data:

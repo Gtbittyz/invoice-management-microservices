@@ -1,0 +1,49 @@
+﻿<div class="page-container" style="padding: 16px;">
+    <div style="display:flex; align-items:center; margin-bottom:16px;">
+        <h1 style="margin:0;">Produtos</h1>
+        <span style="flex: 1 1 auto;"></span>
+        <button mat-raised-button color="primary" (click)="novoProduto()">
+            <mat-icon>add</mat-icon> Novo produto
+        </button>
+    </div>
+
+    @if (carregando) {
+    <div style="display:flex; justify-content:center; padding:32px;">
+        <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    } @else {
+    <table mat-table [dataSource]="produtos" class="mat-elevation-z2" style="width: 100%;">
+
+        <ng-container matColumnDef="codigo">
+            <th mat-header-cell *matHeaderCellDef> Código </th>
+            <td mat-cell *matCellDef="let p"> {{ p.codigo }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="descricao">
+            <th mat-header-cell *matHeaderCellDef> Descrição </th>
+            <td mat-cell *matCellDef="let p"> {{ p.descricao }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="saldo">
+            <th mat-header-cell *matHeaderCellDef> Saldo </th>
+            <td mat-cell *matCellDef="let p"> {{ p.saldo }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef> </th>
+            <td mat-cell *matCellDef="let p" style="text-align: right;">
+                <button mat-icon-button (click)="editarProduto(p)" aria-label="Editar produto">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+    </table>
+
+    @if (produtos.length === 0) {
+    <p style="text-align:center; margin-top:24px; color:#666;">Nenhum produto cadastrado ainda.</p>
+    }
+    }
+</div>

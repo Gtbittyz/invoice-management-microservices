@@ -1,0 +1,6 @@
+@Korp_Test_GustavoTavares_HostAddress = http://localhost:5031
+
+GET {{Korp_Test_GustavoTavares_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
