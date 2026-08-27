@@ -1,14 +1,13 @@
-﻿# Korp_Test_GustavoTavares — Sistema de Emissão de Notas Fiscais
+﻿# Invoice Management Microservice — Sistema de Emissão de Notas Fiscais
 
-Projeto desenvolvido para o teste técnico da Korp: cadastro de produtos,
-emissão de notas fiscais e impressão com baixa automática de estoque,
-implementado como dois microsserviços em **C# (.NET 8)** + frontend em
-**Angular 17**, com **PostgreSQL** como banco de dados.
+Sistema completo de gestão de estoque e faturamento construído com arquitetura de microsserviços em .NET 8
+e frontend dinâmico em Angular 17. A aplicação orquestra a baixa automática de saldo de estoque integrada 
+à emissão e impressão de notas fiscais, utilizando PostgreSQL para persistência de dados.
 
 ## Estrutura do repositório
 
 ```
-# Korp_Test_GustavoTavare/
+# invoice-management-microservices/
 ├── backend/
 │   ├── EstoqueService/        # Microsserviço de Estoque (produtos e saldo)
 │   └── FaturamentoService/     # Microsserviço de Faturamento (notas fiscais)
