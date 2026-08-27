@@ -1,7 +1,5 @@
 # Detalhamento Técnico — Sistema de Notas Fiscais
 
-Este documento responde diretamente aos pontos exigidos pelo teste técnico da Korp.
-
 ## 1. Arquitetura geral
 
 - **Frontend**: Angular 17 (standalone components) + Angular Material.
