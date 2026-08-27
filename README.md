@@ -1,4 +1,4 @@
-﻿# Korp_Test_GustavoTavres — Sistema de Emissão de Notas Fiscais
+﻿# Korp_Test_GustavoTavares — Sistema de Emissão de Notas Fiscais
 
 Projeto desenvolvido para o teste técnico da Korp: cadastro de produtos,
 emissão de notas fiscais e impressão com baixa automática de estoque,
@@ -8,7 +8,7 @@ implementado como dois microsserviços em **C# (.NET 8)** + frontend em
 ## Estrutura do repositório
 
 ```
-Korp_Teste_SeuNome/
+# Korp_Test_GustavoTavare/
 ├── backend/
 │   ├── EstoqueService/        # Microsserviço de Estoque (produtos e saldo)
 │   └── FaturamentoService/     # Microsserviço de Faturamento (notas fiscais)
